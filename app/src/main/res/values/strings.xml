@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Task</string>
+    <string name="login">Login</string>
+    <string name="Signup">No account yet? Create one</string>
+    <string name="register">Sign Up</string>
+    <string name="map_key"> translatable=false>AIzaSyAgwwE-mwP6X3kFjdwlp3KnTyO4pPTVtoI</string>
+</resources>
