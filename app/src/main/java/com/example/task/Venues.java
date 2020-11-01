@@ -11,7 +11,7 @@ public class Venues {
     Double longitudeDouble;
 
     public void setAddress(String address) {
-        Address = address;
+        this.Address = address;
     }
 
     public void setLongitude(String longitude) {
@@ -19,11 +19,11 @@ public class Venues {
     }
 
     public void setCategory(String category) {
-        Category = category;
+        this.Category = category;
     }
 
     public void setIcon(String icon) {
-        Icon = icon;
+        this.Icon = icon;
     }
 
     public void setLatitude(String latitude) {
@@ -31,7 +31,7 @@ public class Venues {
     }
 
     public void setName(String name) {
-        Name = name;
+        this.Name = name;
     }
 
     public Double getLatitude() {
@@ -45,6 +45,7 @@ public class Venues {
     }
 
     public String getAddress() {
+        Address.replace("[","");
         return Address;
     }
 

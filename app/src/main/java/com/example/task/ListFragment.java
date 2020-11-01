@@ -39,10 +39,10 @@ public class ListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.listfragment, container, false);
         venuesList = view.findViewById(R.id.listView);
-        ArrayList<String> venuesNameList = new ArrayList<>();
-        ArrayList<String> venuesAddressList = new ArrayList<>();
-        ArrayList<String> venuesCategoryList = new ArrayList<>();
-        ArrayList<String> venuesIconList = new ArrayList<>();
+//        ArrayList<String> venuesNameList = new ArrayList<>();
+//        ArrayList<String> venuesAddressList = new ArrayList<>();
+//        ArrayList<String> venuesCategoryList = new ArrayList<>();
+//        ArrayList<String> venuesIconList = new ArrayList<>();
         ArrayList<Venues> venues;
         ArrayList<String> result = new ArrayList<>();
 

@@ -37,16 +37,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         MapFragment map_Fragment = new MapFragment();
         return map_Fragment;
     }
-
     @Override
     public void onAttach(@NonNull Context context) {
-
         super.onAttach(context);
-
     }
-
-
-
 
     @Nullable
     @Override
@@ -54,28 +48,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.mapfragment, container, false);
         supportMapFragment = (SupportMapFragment)
                 getActivity().getSupportFragmentManager().findFragmentById(R.id.google_map);
-        if(supportMapFragment == null){
-            // Create new Map instance if it doesn't exist
-            supportMapFragment = SupportMapFragment.newInstance();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.google_map, supportMapFragment, "MAP_FRAGMENT")
-                    .commit();
-        }
-        supportMapFragment.getMapAsync(this);
-
+        openMap();
         return view;
     }
 
     @Override
     public void onMapReady(GoogleMap google_Map) {
         googleMap = google_Map;
-
         MarkerOptions markerOptions = new MarkerOptions();
         Bundle bundle = getArguments();
-//        googleMap.addMarker(new MarkerOptions()
-//                .position(new LatLng(0, 0))
-//                .title("Marker"));
-
         if (bundle != null) {
             venues = (ArrayList<Venues>) getArguments().getSerializable("venues");
             for(int i=0;i<venues.size();i++) {
@@ -87,7 +68,27 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        openMap();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(supportMapFragment!= null) {
+            supportMapFragment.onDestroy();
+            googleMap.clear();
+        }
+    }
+    public void openMap(){
+        if(supportMapFragment == null){
+            // Create new Map instance if it doesn't exist
+            supportMapFragment = SupportMapFragment.newInstance();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.google_map, supportMapFragment, "MAP_FRAGMENT")
+                    .commit();
+        }
+        supportMapFragment.getMapAsync(this);
+    }
 }
-
-
-

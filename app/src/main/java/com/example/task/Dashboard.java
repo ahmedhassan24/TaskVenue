@@ -25,9 +25,7 @@ public class Dashboard extends AppCompatActivity {
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
-    public void clickHome(View view) {
-        redirect(this, Home.class);
-    }
+    public void clickHome(View view) { redirect(this, Home.class); }
     public void clickTermsAndConditions(View view) {
         redirect(this, TermsAndConditions.class);
     }

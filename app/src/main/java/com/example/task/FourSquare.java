@@ -36,24 +36,29 @@ public class FourSquare extends AsyncTask<String,String,Object> {
             httpCon.setRequestProperty("Accept", "/");
             httpCon.setRequestProperty("User-Agent", "Mozilla/5.0 ( compatible )");
             httpCon.setRequestMethod(strings[1]);
+            int responseCode = httpCon.getResponseCode();
 //            OutputStream os = httpCon.getOutputStream();
 //            OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
 //            osw.write(strings[1]);
 //            osw.flush();
-            InputStream is = httpCon.getInputStream();
-            BufferedReader bufferreader = new BufferedReader(new InputStreamReader(is));
-            String line = "";
-            data = " ";
-            while (line != null) {
-                line = bufferreader.readLine();
-                data = data + line;
-            }
-            JSONObject json = new JSONObject(data);
+            if(responseCode == httpCon.HTTP_OK) {
+                InputStream is = httpCon.getInputStream();
+                BufferedReader bufferreader = new BufferedReader(new InputStreamReader(is));
+                String line = "";
+                data = " ";
+                while (line != null) {
+                    line = bufferreader.readLine();
+                    data = data + line;
+                }
+                JSONObject json = new JSONObject(data);
 //            osw.close();
 //            os.close();
-            return json;
+                return json;
+            }
+
         } catch (Exception ex) {
             ex.printStackTrace();
+            Log.e("exception input stream", String.valueOf(ex));
         }
         return null;
     }
