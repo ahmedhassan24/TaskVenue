@@ -19,15 +19,15 @@ public class TermsAndConditions extends AppCompatActivity {
         Dashboard.openDrawer(drawerLayout);
     }
     public void clickHome(View view) {
-        Dashboard.redirect(this, Home.class);
+        ActivityHandler.redirect(this, Home.class);
     }
     public void clickMyProfile(View view) {
-        Dashboard.redirect(this, MyProfile.class);
+        ActivityHandler.redirect(this, MyProfile.class);
     }
     public void clickTermsAndConditions(View view) {
         recreate();
     }
     public void clickLogOut(View view) {
-        Dashboard.redirect(this, Login.class);
+        ActivityHandler.redirect(this, Login.class);
     }
 }

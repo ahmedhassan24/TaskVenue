@@ -44,6 +44,6 @@ public class Signup extends AppCompatActivity {
         editor.putString("Email", email);
         editor.putString("Password",password);
         editor.commit();
-        Dashboard.redirect(this, Login.class);
+        ActivityHandler.redirect(this, Login.class);
     }
 }

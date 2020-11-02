@@ -45,12 +45,10 @@ public class Venues {
     }
 
     public String getAddress() {
-        Address.replace("[","");
         return Address;
     }
 
     public String getIcon() {
-
         return Icon;
     }
 

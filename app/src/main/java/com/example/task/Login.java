@@ -48,7 +48,7 @@ public class Login extends AppCompatActivity {
 
                 session.createUserLoginSession(s_email,
                         s_Password);
-                Dashboard.redirect(this, Home.class);
+                ActivityHandler.redirect(this, Home.class);
             } else {
                 Toast.makeText(getApplicationContext(),
                         "Email or Password is incorrect",
@@ -58,6 +58,6 @@ public class Login extends AppCompatActivity {
     }
 
     public void signup(View view) {
-        Dashboard.redirect(this, Signup.class);
+        ActivityHandler.redirect(this, Signup.class);
     }
 }

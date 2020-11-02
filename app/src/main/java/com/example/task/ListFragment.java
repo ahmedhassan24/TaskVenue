@@ -24,8 +24,7 @@ public class ListFragment extends Fragment {
 
 
     public static ListFragment getInstance() {
-        ListFragment list_Fragment = new ListFragment();
-        return list_Fragment;
+        return new ListFragment();
     }
 
     @Override
@@ -50,13 +49,15 @@ public class ListFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             venues = (ArrayList<Venues>)getArguments().getSerializable("venues");
-            for (int i = 0; i < venues.size(); i++) {
-                result.add(venues.get(i).getName() + "\n" + "\n" + venues.get(i).getAddress() + "\n" + "\n" +
-                        venues.get(i).getCategory() + "\n");
-            }
+//            for (int i = 0; i < venues.size(); i++) {
+//                result.add(venues.get(i).getName() + "\n" + "\n" + venues.get(i).getAddress() + "\n" + "\n" +
+//                        venues.get(i).getCategory() + "\n");
+//            }
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, result);
-            venuesList.setAdapter(arrayAdapter);
+            CustomAdapter customAdapter = new CustomAdapter(getContext(),venues);
+
+//            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, result);
+            venuesList.setAdapter(customAdapter);
         }
         return view;
     }

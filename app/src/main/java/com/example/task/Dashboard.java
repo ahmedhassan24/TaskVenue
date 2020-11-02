@@ -25,22 +25,15 @@ public class Dashboard extends AppCompatActivity {
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
-    public void clickHome(View view) { redirect(this, Home.class); }
+    public void clickHome(View view) {
+        ActivityHandler.redirect(this, Home.class); }
     public void clickTermsAndConditions(View view) {
-        redirect(this, TermsAndConditions.class);
+        ActivityHandler.redirect(this, TermsAndConditions.class);
     }
     public void clickMyProfile(View view) {
-        redirect(this, Home.class);
+        ActivityHandler.redirect(this, Home.class);
     }
     public void clickLogOut(View view) {
-        redirect(this, Login.class);
+        ActivityHandler.redirect(this, Login.class);
     }
-
-    public static void redirect(Activity activity, Class aClass) {
-        Intent intent = new Intent(activity,aClass);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        activity.startActivity(intent);
-    }
-
-
 }

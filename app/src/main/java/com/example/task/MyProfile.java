@@ -20,15 +20,15 @@ public class MyProfile extends AppCompatActivity {
         Dashboard.openDrawer(drawerLayout);
     }
     public void clickHome(View view) {
-        Dashboard.redirect(this, Home.class);
+        ActivityHandler.redirect(this, Home.class);
     }
     public void clickMyProfile(View view) {
         recreate();
     }
     public void clickTermsAndConditions(View view) {
-        Dashboard.redirect(this, TermsAndConditions.class);
+        ActivityHandler.redirect(this, TermsAndConditions.class);
     }
     public void clickLogOut(View view) {
-        Dashboard.redirect(this, Login.class);
+        ActivityHandler.redirect(this, Login.class);
     }
 }

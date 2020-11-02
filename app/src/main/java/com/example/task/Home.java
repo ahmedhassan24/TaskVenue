@@ -32,15 +32,7 @@ public class Home extends AppCompatActivity {
     final String longitude = "31.2021534";
     final String ll= latitude+","+longitude;
     final String foursquareUrl = "https://api.foursquare.com/v2/venues/search?ll="+ll+"&client_id="+Client_ID+"&client_secret="+Client_Secret+"&v=20180910\n";
-
     JsonFormatter jsonFormatter = new JsonFormatter();
-//    ArrayList<Venues> venuesList = new ArrayList<>();
-//    ArrayList<String> venuesNameList = new ArrayList<>();
-//    ArrayList<String> venuesAddressList= new ArrayList<>();
-//    ArrayList<String> venuesCategoryList = new ArrayList<>();
-//    ArrayList<String> venuesIconList= new ArrayList<>();
-//    ArrayList<String> venuesLatList= new ArrayList<>();
-//    ArrayList<String> venuesLongList= new ArrayList<>();
 
     DrawerLayout drawerLayout;
     TabLayout tabLayout;
@@ -170,12 +162,12 @@ public class Home extends AppCompatActivity {
         recreate();
     }
     public void clickMyProfile(View view) {
-        Dashboard.redirect(this, MyProfile.class);
+        ActivityHandler.redirect(this, MyProfile.class);
     }
     public void clickTermsAndConditions(View view) {
-        Dashboard.redirect(this, TermsAndConditions.class);
+        ActivityHandler.redirect(this, TermsAndConditions.class);
     }
     public void clickLogOut(View view) {
-        Dashboard.redirect(this, Login.class);
+        ActivityHandler.redirect(this, Login.class);
     }
 }

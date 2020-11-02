@@ -7,7 +7,13 @@
     <ListView
         android:id="@+id/listView"
         android:scrollbars="vertical"
+        android:divider="#636363"
+        android:dividerHeight="10px"
+        android:focusable="true"
+        android:clickable="false"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true">
     </ListView>
 </LinearLayout>

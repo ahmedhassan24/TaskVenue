@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,9 +35,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     SupportMapFragment supportMapFragment;
 
     public static MapFragment getInstance() {
-        MapFragment map_Fragment = new MapFragment();
-        return map_Fragment;
+        return new MapFragment();
     }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -71,16 +72,53 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onResume() {
         super.onResume();
+        supportMapFragment = (SupportMapFragment)
+                getActivity().getSupportFragmentManager().findFragmentById(R.id.google_map);
         openMap();
     }
     @Override
     public void onPause() {
         super.onPause();
-        if(supportMapFragment!= null) {
-            supportMapFragment.onDestroy();
-            googleMap.clear();
+        try {
+            if(supportMapFragment!= null) {
+                supportMapFragment.onPause();
+                supportMapFragment.onDestroyView();
+                supportMapFragment.onDestroy();
+            }
+        }catch (Exception e){
+
         }
+
+//        supportMapFragment.onPause();
+//        supportMapFragment.onDestroy();
+//        supportMapFragment.onDestroyView();
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        try {
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.remove(supportMapFragment);
+            ft.commit();
+        }catch (Exception e){
+
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        supportMapFragment.onDestroy();
+    }
+
     public void openMap(){
         if(supportMapFragment == null){
             // Create new Map instance if it doesn't exist

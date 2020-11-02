@@ -36,6 +36,7 @@ public class JsonFormatter {
             venue.setName(arr.getJSONObject(i).getString("name"));
             venue.setLatitude(arr.getJSONObject(i).getJSONObject("location").getString("lat"));
             venue.setLongitude(arr.getJSONObject(i).getJSONObject("location").getString("lng"));
+            venue.setIcon(arr.getJSONObject(i).getJSONArray("categories").getJSONObject(0).getJSONObject("icon").getString("prefix")+"bg_32.png");
 
             try{
                 venuesList.add(venue);
