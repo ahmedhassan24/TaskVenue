@@ -47,6 +47,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.mapfragment, container, false);
+        supportMapFragment = new SupportMapFragment();
         supportMapFragment = (SupportMapFragment)
                 getActivity().getSupportFragmentManager().findFragmentById(R.id.google_map);
         openMap();
@@ -72,6 +73,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onResume() {
         super.onResume();
+        supportMapFragment = new SupportMapFragment();
         supportMapFragment = (SupportMapFragment)
                 getActivity().getSupportFragmentManager().findFragmentById(R.id.google_map);
         openMap();
@@ -79,19 +81,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onPause() {
         super.onPause();
-        try {
-            if(supportMapFragment!= null) {
-                supportMapFragment.onPause();
-                supportMapFragment.onDestroyView();
-                supportMapFragment.onDestroy();
-            }
-        }catch (Exception e){
-
-        }
-
-//        supportMapFragment.onPause();
-//        supportMapFragment.onDestroy();
-//        supportMapFragment.onDestroyView();
+//        try {
+//            if(supportMapFragment!= null) {
+//                supportMapFragment = null;
+//            }
+//        }catch (Exception e){
+//
+//        }
+        supportMapFragment = null;
     }
 
     @Override
@@ -103,25 +100,26 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        try {
-            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.remove(supportMapFragment);
-            ft.commit();
-        }catch (Exception e){
-
-        }
+//        try {
+//            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//            ft.remove(supportMapFragment);
+//            ft.commit();
+//        }catch (Exception e){
+//
+//        }
+        supportMapFragment = null;
 
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        supportMapFragment.onDestroy();
+        supportMapFragment = null;
     }
 
     public void openMap(){
         if(supportMapFragment == null){
-            // Create new Map instance if it doesn't exist
+            supportMapFragment = new SupportMapFragment();
             supportMapFragment = SupportMapFragment.newInstance();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.google_map, supportMapFragment, "MAP_FRAGMENT")

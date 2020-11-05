@@ -38,27 +38,24 @@ public class ListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.listfragment, container, false);
         venuesList = view.findViewById(R.id.listView);
-//        ArrayList<String> venuesNameList = new ArrayList<>();
-//        ArrayList<String> venuesAddressList = new ArrayList<>();
-//        ArrayList<String> venuesCategoryList = new ArrayList<>();
-//        ArrayList<String> venuesIconList = new ArrayList<>();
-        ArrayList<Venues> venues;
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<Venues> venues = new ArrayList<Venues>();
+        Venues venues1 = new Venues();
+        venues1.setIcon("https://ss3.4sqi.net/img/categories_v2/parks_outdoors/plaza_bg_32.png");
+        venues1.setLongitude("3333");
+        venues1.setLatitude("44444");
+        venues1.setName("AHMED");
+        venues1.setCategory("svsaaa");
+        venues1.setAddress("aaaaaaa");
+        venues.add(venues1);
 
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            venues = (ArrayList<Venues>)getArguments().getSerializable("venues");
-//            for (int i = 0; i < venues.size(); i++) {
-//                result.add(venues.get(i).getName() + "\n" + "\n" + venues.get(i).getAddress() + "\n" + "\n" +
-//                        venues.get(i).getCategory() + "\n");
-//            }
+//        Bundle bundle = getArguments();
+//        if (bundle != null) {
+//            venues = (ArrayList<Venues>)getArguments().getSerializable("venues");
 
             CustomAdapter customAdapter = new CustomAdapter(getContext(),venues);
-
-//            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, result);
             venuesList.setAdapter(customAdapter);
-        }
+//        }
         return view;
     }
 }

@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.task.SQL.DatabaseHandler;
+import com.google.android.material.snackbar.Snackbar;
 
 public class Signup extends AppCompatActivity {
 
@@ -14,6 +18,9 @@ public class Signup extends AppCompatActivity {
     EditText first_Name, last_Name, email_edit, age_edit, password_edit;
     Button regButton;
     SharedPreferences.Editor editor;
+    User user = new User();
+    DatabaseHandler databaseHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,22 +35,31 @@ public class Signup extends AppCompatActivity {
 
         sharedPreferences = getApplicationContext().getSharedPreferences("signUp", 0);
         editor = sharedPreferences.edit();
+        databaseHandler = new DatabaseHandler(this);
     }
 
     public void signup(View view) {
+        postDataToDatabase();
+    }
+
+    public void postDataToDatabase() {
         String firstName = first_Name.getText().toString();
         String lastName = last_Name.getText().toString();
         String age = age_edit.getText().toString();
         String email = email_edit.getText().toString();
         String password = password_edit.getText().toString();
-
-
-        editor.putString("First Name", firstName);
-        editor.putString("Last Name", lastName);
-        editor.putString("Age", age);
-        editor.putString("Email", email);
-        editor.putString("Password",password);
-        editor.commit();
-        ActivityHandler.redirect(this, Login.class);
+        if (databaseHandler.checkUser(email)) {
+            Toast.makeText(getApplicationContext(),
+                    "Email already exists",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setAge(age);
+            databaseHandler.addUser(user);
+            ActivityHandler.redirect(this, Login.class);
+        }
     }
 }

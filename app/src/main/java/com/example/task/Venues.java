@@ -1,6 +1,6 @@
 package com.example.task;
 
-public class Venues {
+public class Venues implements java.io.Serializable{
     String Name;
     String Category;
     String Icon;

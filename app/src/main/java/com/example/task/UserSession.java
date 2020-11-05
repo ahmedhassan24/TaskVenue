@@ -11,7 +11,6 @@ public class UserSession {
     int PRIVATE_MODE = 0;
     public static final String status = "signUp";
     public static final String IS_USER_LOGIN = "IsUserLoggedIn";
-    public static final String NAME = "Name";
     public static final String EMAIL = "Email";
     public static final String PASSWORD = "password";
 

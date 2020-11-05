@@ -25,15 +25,8 @@ import java.util.concurrent.ExecutionException;
 
 public class Home extends AppCompatActivity {
 
-    public static final int REQUEST_LOCATION = 1;
-    final String Client_ID = "4EQRZPSGKBZGFSERGJY055FRW2OSPJRZYR4C3J0JN2CQQFIV";
-    final String Client_Secret = "AJR4B5LLRONWAJWJJOACHAFLCWS2YJAZMGQNFFZQP0IB3THR";
-    final String latitude = "30.0418061";
-    final String longitude = "31.2021534";
-    final String ll= latitude+","+longitude;
-    final String foursquareUrl = "https://api.foursquare.com/v2/venues/search?ll="+ll+"&client_id="+Client_ID+"&client_secret="+Client_Secret+"&v=20180910\n";
     JsonFormatter jsonFormatter = new JsonFormatter();
-
+    Response response = new Response();
     DrawerLayout drawerLayout;
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -47,65 +40,28 @@ public class Home extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
 
-        //getLocation();
-        JSONObject result = new JSONObject();
-        String type = "GET";
-        FourSquare fsq = new FourSquare();
-        try {
-            result = (JSONObject) fsq.execute(foursquareUrl,type).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        try {
-            jsonFormatter.parse(result);
-//            parseJSON(result);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        //getLocation();
+//        JSONObject result = new JSONObject();
+////        String result = "";
+//        FourSquare fsq = new FourSquare();
+//        try {
+//            result = (JSONObject) fsq.execute(Constants.foursquareUrl,Constants.getRequest).get();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            jsonFormatter.parse(result);
+////            jsonFormatter.parseGson(result);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        jsonFormatter.parseGson();
         TabHandler tabHandler = new TabHandler(viewPager,jsonFormatter,tabLayout);
         tabHandler.getTabs(viewPageAdapter);
-//        getTabs();
     }
-//    public void getTabs(){
-//        new Handler().post(new Runnable() {
-//            @Override
-//            public void run() {
-//                final PageAdapter viewPageAdapter = new PageAdapter(getSupportFragmentManager());
-//                viewPageAdapter.addFragment(getListFragmentInstance(),"Venues");
-//                viewPageAdapter.addFragment(getMapFragmentInstance(),"Map");
-//                viewPager.setAdapter(viewPageAdapter);
-//                tabLayout.setupWithViewPager(viewPager);
-//            }
-//        });
-//    }
 
-    // Return the ListFragment instance with appropriate data
-
-//    private ListFragment getListFragmentInstance() {
-//        ListFragment fragment=ListFragment.getInstance();
-//
-//        //Add some values to Bundle
-//        Bundle bundle=new Bundle();
-//        bundle.putSerializable("venues",jsonFormatter.getVenuesList());
-////        bundle.putSerializable("venues",venuesList);
-//
-//        fragment.setArguments(bundle);
-//        return fragment;
-//    }
-
-//    private MapFragment getMapFragmentInstance(){
-//        MapFragment fragment = MapFragment.getInstance();
-//        Bundle bundle=new Bundle();
-//
-//        bundle.putSerializable("venues",jsonFormatter.getVenuesList());
-////        bundle.putSerializable("venues",venuesList);
-//        fragment.setArguments(bundle);
-//
-//        return fragment;
-//    }
 
 
 //    private void getLocation() {
@@ -121,40 +77,14 @@ public class Home extends AppCompatActivity {
 //            }
 //        }
 //    }
-//    public void parseJSON(JSONObject json) throws JSONException {
-//        JSONArray arr = json.getJSONObject("response").getJSONArray("venues");
-//        JSONArray address;
-//        for(int i=0;i<arr.length();i++) {
-//            address = arr.getJSONObject(i).getJSONObject("location").getJSONArray("formattedAddress");
-//            Venues venue = new Venues();
-//            StringBuilder address_string = new StringBuilder();
-//            for(int counter=0;counter<address.length();counter++)
-//            {
-//                if(counter == address.length()-1)
-//                {
-//                    address_string.append(address.getString(counter));
-//                }
-//                else
-//                {
-//                    address_string.append(address.getString(counter));
-//                    address_string.append(" ");
-//                }
-//            }
-//            venue.setAddress(address_string.toString());
-//            venue.setCategory(arr.getJSONObject(i).getJSONArray("categories").getJSONObject(0).getString("name"));
-//            venue.setName(arr.getJSONObject(i).getString("name"));
-//            venue.setLatitude(arr.getJSONObject(i).getJSONObject("location").getString("lat"));
-//            venue.setLongitude(arr.getJSONObject(i).getJSONObject("location").getString("lng"));
-//
-//            try{
-//                venuesList.add(venue);
-//            }
-//            catch (Exception e)
-//            {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        jsonFormatter.venuesList = null;
+    }
+
     public void clickMenu(View view){
         Dashboard.openDrawer(drawerLayout);
     }
