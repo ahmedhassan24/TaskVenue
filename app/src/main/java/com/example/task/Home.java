@@ -32,6 +32,7 @@ public class Home extends AppCompatActivity {
     ViewPager viewPager;
     final PageAdapter viewPageAdapter = new PageAdapter(getSupportFragmentManager());
     LocationManager locationManager;
+    Places places = new Places();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,6 @@ public class Home extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
-
 //        //getLocation();
 //        JSONObject result = new JSONObject();
 ////        String result = "";
@@ -57,8 +57,15 @@ public class Home extends AppCompatActivity {
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
-        jsonFormatter.parseGson();
-        TabHandler tabHandler = new TabHandler(viewPager,jsonFormatter,tabLayout);
+//        jsonFormatter.parseGson();
+        try {
+            places = jsonFormatter.execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        TabHandler tabHandler = new TabHandler(viewPager,places,tabLayout);
         tabHandler.getTabs(viewPageAdapter);
     }
 

@@ -18,10 +18,10 @@ public class Constants {
     public static final String COLUMN_USER_EMAIL = "user_email";
     public static final String COLUMN_USER_PASSWORD = "user_password";
     public static final String COLUMN_USER_AGE = "user_age";
-    public static final String baseURL = "https://api.foursquare.com/";
+    public static final String baseURL = "https://api.foursquare.com";
     public static final String relativeURL = "v2/venues/search?ll="+ll+"&client_id="+Client_ID+"&client_secret="+Client_Secret+"&v="+v;
     public static final String relativeURL2 = "v2/venues/search?ll={ll}&client_id={Client_ID}&client_secret={client_secret}&v={v}";
-    public static final String relativeURL3 = "v2/venues/search";
+    public static final String relativeURL3 = "/v2/venues/search";
     public String getClient_ID() {
         return Client_ID;
     }

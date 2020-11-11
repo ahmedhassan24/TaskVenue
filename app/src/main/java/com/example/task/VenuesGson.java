@@ -5,32 +5,30 @@ import android.location.Location;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class VenuesGson {
+public class VenuesGson implements Serializable {
     @SerializedName("name")
-    @Expose
-    String Name;
+    String name;
     @SerializedName("location")
-    @Expose
-    Location location;
+    LocationFourSquare location;
     @SerializedName("categories")
-    @Expose
     ArrayList<Category> categories;
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
-    public Location getLocation() {
+    public LocationFourSquare getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(LocationFourSquare location) {
         this.location = location;
     }
 
