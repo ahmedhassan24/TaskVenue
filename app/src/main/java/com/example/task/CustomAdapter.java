@@ -14,9 +14,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class CustomAdapter implements ListAdapter {
-    ArrayList<Venues> arrayList = new ArrayList<Venues>();
+    ArrayList<VenuesGson> arrayList = new ArrayList<VenuesGson>();
     Context context;
-    public CustomAdapter(Context context, ArrayList<Venues> arrayList) {
+    public CustomAdapter(Context context, ArrayList<VenuesGson> arrayList) {
         this.arrayList=arrayList;
         this.context=context;
     }
@@ -53,7 +53,7 @@ public class CustomAdapter implements ListAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Venues venues=arrayList.get(position);
+        VenuesGson venues=arrayList.get(position);
         if(convertView==null){
             LayoutInflater layoutInflater = LayoutInflater.from(context);
             convertView=layoutInflater.inflate(R.layout.venueslistview, null);
@@ -62,10 +62,10 @@ public class CustomAdapter implements ListAdapter {
             TextView category=convertView.findViewById(R.id.category);
             ImageView icon=convertView.findViewById(R.id.icon);
             name.setText(venues.getName());
-            address.setText(venues.getAddress());
-            category.setText(venues.getCategory());
+            address.setText(venues.getLocation().getFormattedAddress());
+            category.setText(venues.getCategories().get(0).getCategoryName());
             Picasso.with(context)
-                    .load(venues.getIcon())
+                    .load(venues.getCategories().get(0).getIcon().getVenuesIcon())
                     .resize(200,200)
                     .into(icon);
         }

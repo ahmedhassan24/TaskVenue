@@ -29,6 +29,8 @@ import java.util.ArrayList;
 public class MapFragment extends Fragment implements OnMapReadyCallback {
     GoogleMap googleMap;
     ArrayList<Venues> venues = new ArrayList<>();
+    Places places = new Places();
+    ArrayList<VenuesGson> venuesGsonArrayList = new ArrayList<>();
     ArrayList<Double> latitude = new ArrayList<>();
     ArrayList<Double> longitude = new ArrayList<>();
     Marker marker;
@@ -60,10 +62,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         MarkerOptions markerOptions = new MarkerOptions();
         Bundle bundle = getArguments();
         if (bundle != null) {
-            venues = (ArrayList<Venues>) getArguments().getSerializable("venues");
-            for(int i=0;i<venues.size();i++) {
-                LatLng latLng = new LatLng(venues.get(i).getLatitude(),venues.get(i).getLongitude());
-                marker = googleMap.addMarker(new MarkerOptions().position(latLng).title(venues.get(i).getName()).visible(true));
+            places = (Places) getArguments().getSerializable("venues");
+            venuesGsonArrayList = places.getResponse().getVenuesGson();
+            for(int i=0;i<venuesGsonArrayList.size();i++) {
+                LatLng latLng = new LatLng(venuesGsonArrayList.get(i).getLocation().getLat(),venuesGsonArrayList.get(i).getLocation().getLng());
+                marker = googleMap.addMarker(new MarkerOptions().position(latLng).title(venuesGsonArrayList.get(i).getName()).visible(true));
             }
             LatLng home = new LatLng(30.0418061,31.2021534);
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(home,14));
