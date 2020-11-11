@@ -3,12 +3,12 @@ package com.example.task;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Meta {
+import java.io.Serializable;
+
+public class Meta implements Serializable {
     @SerializedName("code")
-    @Expose
     private Integer code;
     @SerializedName("requestId")
-    @Expose
     private String requestId;
 
     public Integer getCode() {

@@ -3,7 +3,9 @@ package com.example.task;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Places {
+import java.io.Serializable;
+
+public class Places implements Serializable {
     @SerializedName("meta")
     private Meta meta;
     @SerializedName("response")

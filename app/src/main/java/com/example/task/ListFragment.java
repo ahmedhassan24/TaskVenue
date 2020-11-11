@@ -21,6 +21,8 @@ import java.util.List;
 
 public class ListFragment extends Fragment {
     ListView venuesList;
+    Places places = new Places();
+    ArrayList<VenuesGson> venuesGsonArrayList= new ArrayList<VenuesGson>();
 
 
     public static ListFragment getInstance() {
@@ -38,24 +40,24 @@ public class ListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.listfragment, container, false);
         venuesList = view.findViewById(R.id.listView);
-        ArrayList<Venues> venues = new ArrayList<Venues>();
-        Venues venues1 = new Venues();
-        venues1.setIcon("https://ss3.4sqi.net/img/categories_v2/parks_outdoors/plaza_bg_32.png");
-        venues1.setLongitude("3333");
-        venues1.setLatitude("44444");
-        venues1.setName("AHMED");
-        venues1.setCategory("svsaaa");
-        venues1.setAddress("aaaaaaa");
-        venues.add(venues1);
+        VenuesGson venues1 = new VenuesGson();
+//        venues1.setIcon("https://ss3.4sqi.net/img/categories_v2/parks_outdoors/plaza_bg_32.png");
+//        venues1.setLongitude("3333");
+//        venues1.setLatitude("44444");
+//        venues1.setName("AHMED");
+//        venues1.setCategory("svsaaa");
+//        venues1.setAddress("aaaaaaa");
+//        venues.add(venues1);
 
 
-//        Bundle bundle = getArguments();
-//        if (bundle != null) {
+        Bundle bundle = getArguments();
+        if (bundle != null) {
 //            venues = (ArrayList<Venues>)getArguments().getSerializable("venues");
-
-            CustomAdapter customAdapter = new CustomAdapter(getContext(),venues);
-            venuesList.setAdapter(customAdapter);
-//        }
+            places = (Places) getArguments().get("venues");
+            venuesGsonArrayList = places.getResponse().getVenuesGson();
+        }
+        CustomAdapter customAdapter = new CustomAdapter(getContext(),venuesGsonArrayList);
+        venuesList.setAdapter(customAdapter);
         return view;
     }
 }

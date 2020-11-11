@@ -2,7 +2,9 @@ package com.example.task;
 
 import com.google.gson.annotations.SerializedName;
 
-public class VenuesIcon {
+import java.io.Serializable;
+
+public class VenuesIcon implements Serializable {
     @SerializedName("prefix")
     String prefix;
     @SerializedName("suffix")
@@ -23,7 +25,7 @@ public class VenuesIcon {
     public void setSuffix(String suffix) {
         this.suffix = suffix;
     }
-    public String getIcon(){
+    public String getVenuesIcon(){
         return this.prefix + "bg_32" + this.suffix;
     }
 }

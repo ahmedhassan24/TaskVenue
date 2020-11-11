@@ -13,13 +13,14 @@ import java.util.Map;
 public class TabHandler {
 
     private ViewPager viewPager;
-    JsonFormatter jsonFormatter;
+    Places places;
+//    JsonFormatter jsonFormatter;
     TabLayout tabLayout;
 
 
-    public TabHandler(ViewPager viewPager, JsonFormatter jsonFormatter,TabLayout tabLayout){
+    public TabHandler(ViewPager viewPager, Places places,TabLayout tabLayout){
         this.viewPager = viewPager;
-        this.jsonFormatter = jsonFormatter;
+        this.places = places;
         this.tabLayout = tabLayout;
     }
     public void getTabs(PageAdapter viewPageAdapter){
@@ -40,7 +41,7 @@ public class TabHandler {
 
         //Add some values to Bundle
         Bundle bundle=new Bundle();
-        bundle.putSerializable("venues",jsonFormatter.getVenuesList());
+        bundle.putSerializable("venues",places);
 //        bundle.putSerializable("venues",venuesList);
 
         fragment.setArguments(bundle);
@@ -52,7 +53,7 @@ public class TabHandler {
 
         //Add some values to Bundle
         Bundle bundle=new Bundle();
-        bundle.putSerializable("venues",jsonFormatter.getVenuesList());
+        bundle.putSerializable("venues",places);
 //        bundle.putSerializable("venues",venuesList);
 
         fragment.setArguments(bundle);
